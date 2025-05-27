@@ -12,6 +12,7 @@
       text-align: center;
       padding: 40px;
       background: #f2f2f2;
+      position: relative;
     }
 
     h2 {
@@ -51,19 +52,27 @@
       margin-left: 8px;
       font-size: 1.5em;
     }
+
+    .footer {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      font-size: 14px;
+      color: #888;
+    }
   </style>
 </head>
 <body>
 
-  <h2><i class="fa-solid fa-calculator icon"></i>حاسبة درجات الترم الثاني</h2>
+  <h2><i class="fa-solid fa-calculator icon"></i>حاسبة درجات نهاية العام</h2>
 
   <label for="subject">اختر المادة:</label><br>
   <select id="subject">
-    <option value="arabic">&#x1F4D6; اللغة العربية</option>
-    <option value="math">&#x1F522; الرياضيات</option>
-    <option value="english">&#x1F30D; الإنجليزي</option>
-    <option value="science">&#x1F52C; العلوم</option>
-    <option value="social">&#x1F5FA; الدراسات</option>
+    <option value="arabic">📘 اللغة العربية</option>
+    <option value="math">🔢 الرياضيات</option>
+    <option value="english">🌍 الإنجليزي</option>
+    <option value="science">🔬 العلوم</option>
+    <option value="social">🗺️ الدراسات</option>
   </select><br>
 
   <label for="firstTerm">درجة الترم الأول:</label><br>
@@ -75,6 +84,8 @@
   <button onclick="calculate()"><i class="fa-solid fa-equals icon"></i> احسب</button>
 
   <div class="result" id="result"></div>
+
+  <div class="footer">Created by: Omar Rady</div>
 
   <script>
     const subjectFactors = {
