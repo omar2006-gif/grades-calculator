@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>حاسبة درجات الترم</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      text-align: center;
+      padding: 40px;
+      background: #f2f2f2;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    select, input, button {
+      margin: 15px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 250px;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 22px;
+      color: green;
+    }
+
+    .icon {
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2><i class="fa-solid fa-calculator icon"></i>حساب الدرجات</h2>
+
+  <label for="subject">اختر المادة:</label><br>
+  <select id="subject">
+    <option value="arabic">&#x1F4D6; اللغة العربية</option>
+    <option value="math">&#x1F522; الرياضيات</option>
+    <option value="english">&#x1F30D; الإنجليزي</option>
+    <option value="science">&#x1F52C; العلوم</option>
+    <option value="social">&#x1F5FA; الدراسات</option>
+  </select><br>
+
+  <label for="secondTerm">درجة الترم الثاني:</label><br>
+  <input type="number" id="secondTerm" placeholder="اكتب الدرجة هنا"><br>
+
+  <button onclick="calculate()"><i class="fa-solid fa-equals icon"></i> احسب</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const subjects = {
+      arabic: { factor: 2.5, firstTerm: 93 },
+      math: { factor: 3.3333333, firstTerm: 93 },
+      english: { factor: 3.0, firstTerm: 98 },
+      science: { factor: 5.0, firstTerm: 94 },
+      social: { factor: 5.0, firstTerm: 93 }
+    };
+
+    function calculate() {
+      const subjectKey = document.getElementById("subject").value;
+      const secondTerm = parseFloat(document.getElementById("secondTerm").value);
+
+      if (isNaN(secondTerm)) {
+        document.getElementById("result").innerText = "من فضلك أدخل درجة الترم الثاني.";
+        return;
+      }
+
+      const subject = subjects[subjectKey];
+      const result = (subject.factor * secondTerm) - subject.firstTerm;
+
+      document.getElementById("result").innerText = `✅ النتيجة النهائية: ${result.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
