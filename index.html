@@ -20,12 +20,12 @@
     }
 
     select, input, button {
-      margin: 15px;
+      margin: 10px;
       padding: 12px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      width: 250px;
+      width: 260px;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
     }
 
@@ -49,12 +49,13 @@
 
     .icon {
       margin-left: 8px;
+      font-size: 1.5em;
     }
   </style>
 </head>
 <body>
 
-  <h2><i class="fa-solid fa-calculator icon"></i>حساب الدرجات</h2>
+  <h2><i class="fa-solid fa-calculator icon"></i>حاسبة درجات الترم الثاني</h2>
 
   <label for="subject">اختر المادة:</label><br>
   <select id="subject">
@@ -65,6 +66,9 @@
     <option value="social">&#x1F5FA; الدراسات</option>
   </select><br>
 
+  <label for="firstTerm">درجة الترم الأول:</label><br>
+  <input type="number" id="firstTerm" placeholder="اكتب الدرجة هنا"><br>
+
   <label for="secondTerm">درجة الترم الثاني:</label><br>
   <input type="number" id="secondTerm" placeholder="اكتب الدرجة هنا"><br>
 
@@ -73,25 +77,26 @@
   <div class="result" id="result"></div>
 
   <script>
-    const subjects = {
-      arabic: { factor: 2.5, firstTerm: 93 },
-      math: { factor: 3.3333333, firstTerm: 93 },
-      english: { factor: 3.0, firstTerm: 98 },
-      science: { factor: 5.0, firstTerm: 94 },
-      social: { factor: 5.0, firstTerm: 93 }
+    const subjectFactors = {
+      arabic: 2.5,
+      math: 3.33,
+      english: 3.0,
+      science: 5.0,
+      social: 5.0
     };
 
     function calculate() {
       const subjectKey = document.getElementById("subject").value;
+      const firstTerm = parseFloat(document.getElementById("firstTerm").value);
       const secondTerm = parseFloat(document.getElementById("secondTerm").value);
 
-      if (isNaN(secondTerm)) {
-        document.getElementById("result").innerText = "من فضلك أدخل درجة الترم الثاني.";
+      if (isNaN(firstTerm) || isNaN(secondTerm)) {
+        document.getElementById("result").innerText = "من فضلك أدخل الدرجتين بشكل صحيح.";
         return;
       }
 
-      const subject = subjects[subjectKey];
-      const result = (subject.factor * secondTerm) - subject.firstTerm;
+      const factor = subjectFactors[subjectKey];
+      const result = (factor * secondTerm) - firstTerm;
 
       document.getElementById("result").innerText = `✅ النتيجة النهائية: ${result.toFixed(2)}`;
     }
