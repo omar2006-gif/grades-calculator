@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>حاسبة درجات الترم</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      text-align: center;
+      padding: 40px;
+      background: #f2f2f2;
+      position: relative;
+    }
 
+    h2 {
+      color: #141313;
+      margin-bottom: 30px;
+    }
+
+    select, input, button {
+      margin: 10px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 260px;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 22px;
+      color: green;
+    }
+
+    .icon {
+      margin-left: 8px;
+      font-size: 1.5em;
+    }
+
+    .footer {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h2><i class="fa-solid fa-calculator icon"></i>حاسبة درجات نهاية العام</h2>
+
+  <label for="subject">اختر المادة:</label><br>
+  <select id="subject">
+    <option value="arabic">📘 اللغة العربية</option>
+    <option value="math">🔢 الرياضيات</option>
+    <option value="english">🌍 الإنجليزي</option>
+    <option value="science">🔬 العلوم</option>
+    <option value="social">🗺️ الدراسات</option>
+  </select><br>
+
+  <label for="firstTerm">درجة الترم الأول:</label><br>
+  <input type="number" id="firstTerm" placeholder="اكتب الدرجة هنا"><br>
+
+  <label for="secondTerm">درجة نهاية العام:</label><br>
+  <input type="number" id="secondTerm" placeholder="اكتب الدرجة هنا"><br>
+
+  <button onclick="calculate()"><i class="fa-solid fa-equals icon"></i> احسب</button>
+
+  <div class="result" id="result"></div>
+
+  <div class="footer">Created by: Omar Rady</div>
+
+  <script>
+    const subjectFactors = {
+      arabic: 2.5,
+      math: 3.33,
+      english: 3.0,
+      science: 5.0,
+      social: 5.0
+    };
+
+    function calculate() {
+      const subjectKey = document.getElementById("subject").value;
+      const firstTerm = parseFloat(document.getElementById("firstTerm").value);
+      const secondTerm = parseFloat(document.getElementById("secondTerm").value);
+
+      if (isNaN(firstTerm) || isNaN(secondTerm)) {
+        document.getElementById("result").innerText = "من فضلك أدخل الدرجتين بشكل صحيح.";
+        return;
+      }
+
+      const factor = subjectFactors[subjectKey];
+      const result = (factor * secondTerm) - firstTerm;
+
+      document.getElementById("result").innerText = `✅ النتيجة النهائية: ${result.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
